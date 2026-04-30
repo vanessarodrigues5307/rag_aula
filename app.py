@@ -14,9 +14,13 @@ print("Vectorstore", len(docs))
 def home():
     return render_template("index.html")
 
-@app.route("/institucional")
-def institucional():
-    return render_template("sobre.html")
+@app.route("/chat")
+def chat():
+    return render_template("chat.html")
+
+@app.route("/recursos")
+def recursos():
+    return render_template("recursos.html")
 
 @app.route("/ask", methods = ["POST"])
 
