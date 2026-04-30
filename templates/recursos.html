@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+<!-- Herda o layout base -->
+{% block content %}
+<!-- Aba 3: Recursos e Referências -->
+<div class="recursos-container">
+    <h2>Recursos e Referências</h2>
+    
+    <div class="resources-section">
+        <h3>📚 Livros Recomendados</h3>
+        <div class="resource-list">
+            <div class="resource-item">
+                <h4>Practical Software Measurement</h4>
+                <p><strong>Autores:</strong> William A. Florac, Anita D. Carleton</p>
+                <p>Um guia prático sobre implementação de programas de medição de software, com foco em métricas e análise de dados.</p>
+            </div>
+            <div class="resource-item">
+                <h4>The Art of Software Testing</h4>
+                <p><strong>Autores:</strong> Glenford Myers, Corey Sandler, Tom Badgett</p>
+                <p>Aborda técnicas de teste e qualidade de software, incluindo métricas de teste e cobertura.</p>
+            </div>
+            <div class="resource-item">
+                <h4>Software Quality: Concepts and Practice</h4>
+                <p><strong>Autor:</strong> Mordechai Ben-Menachem, Gareth S. Marliss</p>
+                <p>Análise abrangente de qualidade de software, padrões e métricas de qualidade.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="resources-section">
+        <h3>🎯 Padrões e Normas</h3>
+        <div class="resource-list">
+            <div class="resource-item">
+                <h4>ISO/IEC 25010:2023</h4>
+                <p>Modelo de Qualidade de Software e Confiabilidade. Define as características de qualidade do software.</p>
+            </div>
+            <div class="resource-item">
+                <h4>CMMI for Development (CMMI-DEV v2.0)</h4>
+                <p>Modelo de Maturidade e Capacidade Integrado. Framework para melhoria contínua de processo.</p>
+            </div>
+            <div class="resource-item">
+                <h4>GQM - Goal Question Metric</h4>
+                <p>Framework de medição que conecta objetivos de negócio com métricas técnicas.</p>
+            </div>
+            <div class="resource-item">
+                <h4>Six Sigma</h4>
+                <p>Metodologia de melhoria de processo com foco em redução de variabilidade e defeitos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="resources-section">
+        <h3>📊 Tipos de Métricas Comuns</h3>
+        <div class="resource-list">
+            <div class="resource-item">
+                <h4>Métricas de Processo</h4>
+                <ul>
+                    <li>Velocity - produtividade da equipe</li>
+                    <li>Lead Time - tempo do pedido ao entrega</li>
+                    <li>Cycle Time - tempo de desenvolvimento</li>
+                    <li>Burn Down/Up - progresso do sprint</li>
+                </ul>
+            </div>
+            <div class="resource-item">
+                <h4>Métricas de Código</h4>
+                <ul>
+                    <li>Complexidade Ciclomática - complexidade do código</li>
+                    <li>Cobertura de Testes - porcentagem de código testado</li>
+                    <li>Duplicação de Código - código repetido</li>
+                    <li>Linhas de Código (LOC) - tamanho do código</li>
+                </ul>
+            </div>
+            <div class="resource-item">
+                <h4>Métricas de Qualidade</h4>
+                <ul>
+                    <li>Taxa de Defeitos - número de bugs por unidade</li>
+                    <li>Confiabilidade - MTBF (Mean Time Between Failures)</li>
+                    <li>Manutenibilidade - custo de mudanças</li>
+                    <li>Segurança - vulnerabilidades e brechas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="resources-section">
+        <h3>💡 Dicas para Começar</h3>
+        <div class="tips-list">
+            <div class="tip">
+                <strong>1. Defina Objetivos Claros</strong> - Antes de medir, tenha claro o que você quer alcançar.
+            </div>
+            <div class="tip">
+                <strong>2. Comece Simples</strong> - Não implemente todas as métricas de uma vez. Comece com 2-3 fundamentais.
+            </div>
+            <div class="tip">
+                <strong>3. Automatize a Coleta</strong> - Use ferramentas para coletar métricas automaticamente.
+            </div>
+            <div class="tip">
+                <strong>4. Analise Periodicamente</strong> - Revise as métricas regularmente para identificar tendências.
+            </div>
+            <div class="tip">
+                <strong>5. Tome Ação</strong> - As métricas devem levar a ações e melhorias.
+            </div>
+        </div>
+    </div>
+
+    <div class="resources-section">
+        <h3>🔗 Links Úteis</h3>
+        <div class="links-list">
+            <p>• ISO International Standards - <a href="https://www.iso.org" target="_blank">https://www.iso.org</a></p>
+            <p>• CMMI Institute - <a href="https://cmmiinstitute.com" target="_blank">https://cmmiinstitute.com</a></p>
+            <p>• Agile Alliance - <a href="https://www.agilealliance.org" target="_blank">https://www.agilealliance.org</a></p>
+            <p>• Software Engineering Institute (SEI) - <a href="https://www.sei.cmu.edu" target="_blank">https://www.sei.cmu.edu</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

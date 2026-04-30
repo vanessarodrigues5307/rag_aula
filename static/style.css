@@ -21,7 +21,7 @@ body {
 ============================== */
 
 header {
-    background: linear-gradient(90deg, #005C2B 0%, #007a3d 100%);
+    background: linear-gradient(90deg, #0066cc 0%, #0052a3 100%);
     color: white;
     padding: 30px 50px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
@@ -135,14 +135,14 @@ main {
 /* Usuário */
 .user {
     font-weight: 600;
-    color: #005C2B;
+    color: #0066cc;
 }
 
 /* IA */
 .ia {
     margin-left: 12px;
     padding-left: 18px;
-    border-left: 4px solid #005C2B;
+    border-left: 4px solid #0066cc;
     color: #1c1c1c;
 }
 
@@ -171,13 +171,13 @@ textarea {
 }
 
 textarea:focus {
-    border-color: #005C2B;
-    box-shadow: 0 0 0 2px rgba(0,92,43,0.15);
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0,102,204,0.15);
 }
 
 button {
     padding: 14px 32px;
-    background: #005C2B;
+    background: #0066cc;
     color: white;
     border: none;
     border-radius: 4px;
@@ -188,7 +188,7 @@ button {
 }
 
 button:hover {
-    background: #00441f;
+    background: #004999;
     transform: translateY(-1px);
 }
 
@@ -197,7 +197,7 @@ button:hover {
 ============================== */
 
 footer {
-    background: #003d1c;
+    background: #003d7a;
     color: white;
     text-align: center;
     padding: 14px;
@@ -250,7 +250,7 @@ footer {
 .typing span {
     width: 8px;
     height: 8px;
-    background-color: #005C2B;
+    background-color: #0066cc;
     border-radius: 50%;
     animation: blink 1.4s infinite both;
 }
@@ -268,4 +268,263 @@ footer {
     20% { opacity: 1; transform: translateY(-3px); }
     40% { opacity: 0.2; transform: translateY(0); }
     100% { opacity: 0.2; }
+}
+
+/* ==============================
+   PÁGINA SOBRE
+============================== */
+
+.sobre-container {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 60px;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    line-height: 1.8;
+}
+
+.sobre-container h2 {
+    color: #0066cc;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.sobre-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.about-section {
+    padding: 25px;
+    background: #f0f4ff;
+    border-left: 4px solid #0066cc;
+    border-radius: 4px;
+}
+
+.about-section h3 {
+    color: #0066cc;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.about-section p {
+    color: #333;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.features-list, .topics-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.features-list li, .topics-list li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    color: #333;
+}
+
+.features-list li::before, .topics-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.call-to-action {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.call-to-action h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.call-to-action p {
+    margin-bottom: 25px;
+    opacity: 0.95;
+}
+
+.btn-chat {
+    display: inline-block;
+    padding: 14px 40px;
+    background: white;
+    color: #0066cc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: 0.25s;
+    text-decoration: none;
+}
+
+.btn-chat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ==============================
+   PÁGINA RECURSOS
+============================== */
+
+.recursos-container {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 60px;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.recursos-container h2 {
+    color: #0066cc;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.resources-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #f0f4ff;
+    border-radius: 6px;
+    border-left: 4px solid #0066cc;
+}
+
+.resources-section h3 {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.resource-item {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.resource-item h4 {
+    color: #0066cc;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.resource-item p {
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.resource-item ul {
+    margin-left: 20px;
+    color: #555;
+}
+
+.resource-item li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.tips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tip {
+    background: white;
+    padding: 18px;
+    border-radius: 4px;
+    border-left: 4px solid #0052a3;
+    color: #333;
+    line-height: 1.6;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.links-list {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    line-height: 2;
+}
+
+.links-list p {
+    color: #555;
+}
+
+.links-list a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.links-list a:hover {
+    text-decoration: underline;
+    color: #0052a3;
+}
+
+/* ==============================
+   NAVEGAÇÃO ATIVA
+============================== */
+
+nav a.active::after {
+    width: 100%;
+}
+
+/* ==============================
+   RESPONSIVIDADE
+============================== */
+
+@media (max-width: 768px) {
+    header {
+        padding: 20px 25px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        margin-right: 15px;
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 25px;
+    }
+
+    .sobre-container, .recursos-container {
+        padding: 30px 20px;
+    }
+
+    .sobre-container h2, .recursos-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .resources-section {
+        padding: 20px;
+    }
+
+    .call-to-action {
+        padding: 25px;
+    }
 }

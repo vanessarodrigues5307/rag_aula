@@ -1,18 +1,220 @@
-Cafeicultura - Base de Conhecimento
+MÉTRICAS E MEDIÇÃO DE SOFTWARE - BASE DE CONHECIMENTO
 
-O cafeeiro é uma cultura perene de grande importância econômica no Brasil. As principais espécies cultivadas são Coffea arabica e Coffea canephora.
+=== 1. INTRODUÇÃO A MÉTRICAS DE SOFTWARE ===
+Métricas de software são medidas quantitativas usadas para avaliar e acompanhar aspectos do desenvolvimento, produto e processo de software. Elas ajudam a tomar decisões baseadas em dados.
 
-Clima:
-O cafeeiro se desenvolve melhor em temperaturas entre 18°C e 23°C. Geadas e temperaturas elevadas podem prejudicar a produção.
+Classificação de Métricas:
+- Métricas de Processo: avaliam efetividade e eficiência do processo de desenvolvimento
+- Métricas de Produto: avaliam características do software entregue
+- Métricas de Recursos: avaliam pessoas, ferramentas e ambiente
 
-Solo:
-Solos bem drenados, com boa fertilidade e pH entre 5,5 e 6,5 são ideais para o cultivo.
+=== 2. MÉTRICAS DE PROCESSO ===
+Velocity (Velocidade):
+Definição: Quantidade de trabalho completada em um sprint (geralmente em story points)
+Cálculo: Soma dos story points concluídos / número de sprints
+Utilidade: Prever velocidade futura, planejar capacidade, identificar tendências
+Interpretação: Aumento = maior produtividade; Queda = possível problema técnico ou de recursos
 
-Adubação:
-A adubação deve ser feita com base na análise de solo, considerando nutrientes como nitrogênio, fósforo e potássio.
+Lead Time (Tempo de Entrada):
+Definição: Tempo desde o pedido do cliente até a entrega
+Fórmula: Data de entrega - Data do pedido
+Objetivo: Minimizar lead time indica melhor responsividade
+Contexto: Importante em ambientes ágeis e DevOps
 
-Pragas:
-Entre as principais pragas estão o bicho-mineiro e a broca-do-café.
+Cycle Time (Tempo de Ciclo):
+Definição: Tempo desde o início do desenvolvimento até a conclusão
+Diferença de Lead Time: Cycle time não inclui tempo de espera antes do desenvolvimento
+Métrica: Em dias ou horas
+Melhoria: Reduzir cycle time melhora feedback ao cliente
 
-Doenças:
-A ferrugem e a cercosporiose são doenças comuns que afetam a produtividade.
+Burndown/Burnup Chart:
+Burndown: Redução de trabalho ao longo do tempo (ideal é linha descendente)
+Burnup: Acúmulo de trabalho concluído ao longo do tempo
+Uso: Acompanhamento visual do progresso do sprint
+Interpretação: Desvios indicam problemas de estimativa ou bloqueios
+
+=== 3. MÉTRICAS DE CÓDIGO ===
+Complexidade Ciclomática:
+Definição: Medida de complexidade baseada no número de caminhos independentes no código
+Cálculo: M = E - N + 2 (E = arestas, N = nós do grafo)
+Interpretação:
+  - 1-10: Simples, baixo risco
+  - 11-20: Moderada, risco médio
+  - 21-50: Complexa, alto risco
+  - >50: Muito complexa, risco muito alto
+Melhoria: Refatoração para reduzir condicionais e loops
+
+Cobertura de Testes:
+Definição: Percentual de código executado durante testes
+Tipos:
+  - Cobertura de Linha: % de linhas executadas
+  - Cobertura de Branch: % de condições testadas
+  - Cobertura de Caminho: % de caminhos independentes
+Meta: Idealmente >80%, crítico >60%, mínimo aceitável >50%
+Ferramenta: JaCoCo, Istanbul, Coverage.py
+
+Duplicação de Código:
+Definição: Blocos de código repetidos em múltiplos locais
+Problema: Dificulta manutenção, aumenta bugs
+Limite Aceitável: <5% duplicação é bom
+Ferramenta: SonarQube, PMD
+Resolução: Extrair em funções/classes reutilizáveis
+
+Linhas de Código (LOC):
+Definição: Número de linhas de código escrito
+Limitações: Não reflete complexidade ou qualidade
+Uso: Estimativas, análise de produtividade
+Variação: LOC por desenvolvedor, LOC por classe, LOC total do projeto
+
+=== 4. MÉTRICAS DE QUALIDADE ===
+Taxa de Defeitos:
+Definição: Número de bugs/defeitos encontrados por unidade (por LOC, por classe, etc)
+Fórmula: Defeitos / Unidade de medida
+Objetivo: Minimizar taxa de defeitos
+Ciclo: Defeitos em desenvolvimento vs em produção
+
+Confiabilidade (Reliability):
+MTBF (Mean Time Between Failures): Tempo médio entre falhas
+MTTR (Mean Time To Repair): Tempo médio para corrigir
+Fórmula: Uptime / (Uptime + Downtime)
+Meta: Aumentar MTBF e diminuir MTTR
+
+Manutenibilidade:
+Indicadores: Complexidade, cobertura de testes, documentação
+Métrica: Índice de Manutenibilidade (0-100)
+Importância: Código mantível é mais seguro e rápido de modificar
+Melhoria: Boas práticas, testes, refatoração
+
+Segurança:
+Vulnerabilidades: Número de brechas de segurança
+CVSS Score: Common Vulnerability Scoring System
+Teste: SAST, DAST, IAST
+Meta: Zero vulnerabilidades críticas em produção
+
+=== 5. FRAMEWORKS E PADRÕES ===
+GQM (Goal Question Metric):
+Processo: Define Objetivo → Questões → Métricas
+Objetivo: O que queremos alcançar?
+Questões: O que precisamos saber?
+Métricas: Como mediremos?
+Benefício: Alinha medição com objetivos de negócio
+
+ISO/IEC 25010 - Modelo de Qualidade:
+8 Características Principais:
+1. Adequação Funcional: funciona conforme especificado
+2. Confiabilidade: funciona sem falhas
+3. Eficiência de Performance: rápido e eficiente
+4. Compatibilidade: coexiste com outros sistemas
+5. Usabilidade: fácil de usar
+6. Segurança: protege dados e acesso
+7. Manutenibilidade: fácil de modificar
+8. Portabilidade: funciona em diferentes ambientes
+
+CMMI (Capability Maturity Model Integrated):
+Níveis de Maturidade:
+1. Initial: Processos impredizíveis
+2. Managed: Processos descritos e executados
+3. Defined: Processos caracterizados, bem compreendidos
+4. Quantitatively Managed: Processos medidos e controlados
+5. Optimizing: Foco em melhoria contínua
+Métricas: Usadas em níveis 4 e 5
+
+Six Sigma:
+Objetivo: Reduzir variação e defeitos a <3.4 por milhão
+DMAIC: Define, Measure, Analyze, Improve, Control
+Metrics: Taxa de defeitos, variação, capacidade de processo
+Aplicação: Manufatura, serviços, software
+
+=== 6. ESCOLHENDO MÉTRICAS APROPRIADAS ===
+Critérios de Seleção:
+- Relevância: Relacionada aos objetivos
+- Viabilidade: Possível de medir com ferramentas disponíveis
+- Actionability: Pode levar a ações concretas
+- Simplicidade: Fácil de entender
+- Confiabilidade: Consistente e reproduzível
+
+Armadilhas Comuns:
+- Medir pelo medir: sem objetivo claro
+- Métricas vaidade: parecem boas mas não acionáveis
+- Muito tempo em coleta: overhead administrativo
+- Ignorar contexto: comparar projetos diferentes
+
+Abordagem Recomendada:
+1. Comece com 3-5 métricas fundamentais
+2. Use dashboards para visualizar
+3. Revisite e ajuste regularmente
+4. Envolva toda a equipe
+5. Tome ações baseadas em insights
+
+=== 7. FERRAMENTAS E TECNOLOGIAS ===
+Ferramentas de Análise Estática:
+- SonarQube: análise multi-linguagem completa
+- Checkstyle: verificação de estilo
+- FindBugs/SpotBugs: detecção de bugs
+- ESLint: para JavaScript
+- Pylint: para Python
+
+Ferramentas de Teste e Cobertura:
+- JaCoCo: cobertura Java
+- Istanbul: cobertura JavaScript
+- Coverage.py: cobertura Python
+- Selenium: testes funcionais
+
+Ferramentas de Monitoramento:
+- Prometheus: coleta de métricas
+- Grafana: visualização
+- New Relic: APM
+- DataDog: monitoramento
+
+=== 8. IMPLEMENTAÇÃO PRÁTICA ===
+Passo 1: Definir Objetivos de Negócio
+- O que queremos melhorar?
+- Qual é a situação atual?
+- Qual é a meta?
+
+Passo 2: Selecionar Métricas
+- GQM para conectar objetivos
+- Escolher 3-5 métricas iniciais
+
+Passo 3: Automatizar Coleta
+- Integrar com ferramentas de CI/CD
+- Criar dashboards
+
+Passo 4: Estabelecer Baselines
+- Coletar dados históricos
+- Identificar padrões
+
+Passo 5: Revisar e Agir
+- Reuniões regulares de análise
+- Implementar melhorias
+- Validar impacto
+
+=== 9. ESTUDOS DE CASO ===
+Caso 1: Melhoria de Cobertura de Testes
+Situação: Cobertura em 45%, taxa de bugs alta
+Ação: Objetivo de 80% de cobertura em 2 trimestres
+Resultado: Redução de 60% em bugs após 6 meses
+
+Caso 2: Redução de Cycle Time
+Situação: Cycle time de 30 dias, muitos bloqueios
+Ação: Implementar GQM, identificar gargalos
+Resultado: Redução para 8 dias com melhor qualidade
+
+Caso 3: Implementação de Six Sigma
+Situação: Processo com alta variação
+Ação: DMAIC para otimização
+Resultado: Variação reduzida em 70%
+
+=== 10. CONCLUSÃO ===
+Métricas de software são ferramentas poderosas para:
+- Entender o estado do software
+- Tomar decisões baseadas em dados
+- Melhorar processo e produto
+- Comunicar progresso
+
+Princípios-chave:
+- Sempre conectar métricas a objetivos
+- Começar simples
+- Automatizar coleta
+- Revisar regularmente
+- Agir baseado em insights
