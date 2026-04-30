@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #eef2ef;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==============================
+   FAIXA SUPERIOR INSTITUCIONAL
+============================== */
+
+header {
+    background: linear-gradient(90deg, #005C2B 0%, #007a3d 100%);
+    color: white;
+    padding: 30px 50px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.header-container {
+    max-width: 1300px;
+    margin: auto;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+header p {
+    font-size: 1rem;
+    margin-top: 6px;
+    opacity: 0.95;
+}
+
+nav {
+    margin-top: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 30px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ==============================
+   MAIN FULL SCREEN
+============================== */
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+/* ==============================
+   CHAT CONTAINER
+============================== */
+
+.chat-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* ==============================
+   CHAT BOX
+============================== */
+
+.chat-box {
+    flex: 1;
+    background: white;
+    border-radius: 6px;
+    padding: 35px;
+    overflow-y: auto;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    border: 1px solid #dbe5df;
+}
+
+/* Scroll elegante */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: #c4d6cc;
+    border-radius: 5px;
+}
+
+/* ==============================
+   MENSAGENS
+============================== */
+
+.msg {
+    margin-bottom: 24px;
+    line-height: 1.7;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Usuário */
+.user {
+    font-weight: 600;
+    color: #005C2B;
+}
+
+/* IA */
+.ia {
+    margin-left: 12px;
+    padding-left: 18px;
+    border-left: 4px solid #005C2B;
+    color: #1c1c1c;
+}
+
+/* ==============================
+   INPUT AREA
+============================== */
+
+.input-area {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+textarea {
+    flex: 1;
+    resize: none;
+    height: 70px;
+    padding: 14px;
+    border: 1px solid #c6d8cf;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s;
+    background: white;
+}
+
+textarea:focus {
+    border-color: #005C2B;
+    box-shadow: 0 0 0 2px rgba(0,92,43,0.15);
+}
+
+button {
+    padding: 14px 32px;
+    background: #005C2B;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #00441f;
+    transform: translateY(-1px);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer {
+    background: #003d1c;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* ==============================
+   INSTITUCIONAL PAGE
+============================== */
+
+.institucional-container {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 60px;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    line-height: 1.8;
+}
+
+.institucional-container h2 {
+    color: #005C2B;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+}
+
+/* ==============================
+   ANIMAÇÃO
+============================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================
+   TYPING INDICATOR
+============================== */
+
+.typing {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-left: 12px;
+    padding-left: 18px;
+    border-left: 4px solid #005C2B;
+}
+
+.typing span {
+    width: 8px;
+    height: 8px;
+    background-color: #005C2B;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; transform: translateY(0); }
+    20% { opacity: 1; transform: translateY(-3px); }
+    40% { opacity: 0.2; transform: translateY(0); }
+    100% { opacity: 0.2; }
+}
