@@ -36,10 +36,15 @@ def ask():
 
     except Exception as e:
         print("erro no vectorstore:",e)
-        contexto_relevante= "/n".join(docs[:4])
+        contexto_relevante= "\n".join(docs[:4])
     
     def gerar():
-        yield from gerar_resposta_stream(contexto_relevante, question)
+        try:
+            yield from gerar_resposta_stream(contexto_relevante, question)
+        except Exception as e:
+            print(f"Erro ao gerar resposta: {e}")
+            yield f"Erro ao gerar resposta: {str(e)}"
+    
     return Response(gerar(), mimetype="text/plain")
 
 if __name__ == "__main__":

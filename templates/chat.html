@@ -110,69 +110,90 @@ document.addEventListener("DOMContentLoaded", function () {
         chatBox.appendChild(typingIndicator);
         chatBox.scrollTop = chatBox.scrollHeight;
 
+        try {
+            // ==============================
+            // REQUISIÇÃO PARA O BACKEND (/ask)
+            // ==============================
 
-        // ==============================
-        // REQUISIÇÃO PARA O BACKEND (/ask)
-        // ==============================
+            const response = await fetch("/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
 
-        const response = await fetch("/ask", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+                // Envia a pergunta em formato JSON
+                body: JSON.stringify({ question: pergunta })
+            });
 
-            // Envia a pergunta em formato JSON
-            body: JSON.stringify({ question: pergunta })
-        });
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
 
+            // ==============================
+            // PREPARAÇÃO PARA STREAMING
+            // ==============================
 
-        // ==============================
-        // PREPARAÇÃO PARA STREAMING
-        // ==============================
+            // reader → lê a resposta em partes (stream)
+            const reader = response.body.getReader();
 
-        // reader → lê a resposta em partes (stream)
-        const reader = response.body.getReader();
+            // decoder → converte bytes para texto
+            const decoder = new TextDecoder("utf-8");
 
-        // decoder → converte bytes para texto
-        const decoder = new TextDecoder("utf-8");
+            let buffer = "";
 
-        let buffer = "";
+            // Remove o indicador "digitando..."
+            if (typingIndicator.parentNode) {
+                chatBox.removeChild(typingIndicator);
+            }
 
+            // ==============================
+            // CRIA MENSAGEM DA IA
+            // ==============================
 
-        // Remove o indicador "digitando..."
-        chatBox.removeChild(typingIndicator);
+            const iaMsg = document.createElement("div");
+            iaMsg.className = "msg ia";
 
+            chatBox.appendChild(iaMsg);
 
-        // ==============================
-        // CRIA MENSAGEM DA IA
-        // ==============================
+            // ==============================
+            // LEITURA DO STREAM (RESPOSTA)
+            // ==============================
 
-        const iaMsg = document.createElement("div");
-        iaMsg.className = "msg ia";
+            while (true) {
 
-        chatBox.appendChild(iaMsg);
+                // Lê um pedaço da resposta
+                const { done, value } = await reader.read();
 
+                // Se terminou, sai do loop
+                if (done) break;
 
-        // ==============================
-        // LEITURA DO STREAM (RESPOSTA)
-        // ==============================
+                // Converte bytes em texto e acumula no buffer
+                buffer += decoder.decode(value, { stream: true });
 
-        while (true) {
+                // Atualiza o conteúdo da mensagem da IA
+                iaMsg.innerText = buffer;
 
-            // Lê um pedaço da resposta
-            const { done, value } = await reader.read();
+                // Mantém scroll no final
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
 
-            // Se terminou, sai do loop
-            if (done) break;
+            // Se o buffer estiver vazio, mostra mensagem
+            if (!buffer || buffer.trim() === "") {
+                iaMsg.innerText = "Desculpe, não consegui processar sua pergunta. Verifique se o Ollama está rodando.";
+            }
 
-            // Converte bytes em texto e acumula no buffer
-            buffer += decoder.decode(value, { stream: true });
+        } catch (error) {
+            console.error("Erro ao enviar pergunta:", error);
+            
+            // Remove indicador se ainda estiver visível
+            if (typingIndicator.parentNode) {
+                chatBox.removeChild(typingIndicator);
+            }
 
-            // Atualiza o conteúdo da mensagem da IA
-            iaMsg.innerText = buffer;
-
-            // Mantém scroll no final
-            chatBox.scrollTop = chatBox.scrollHeight;
+            // Exibe mensagem de erro
+            const erroMsg = document.createElement("div");
+            erroMsg.className = "msg ia";
+            erroMsg.innerText = `❌ Erro: ${error.message}\n\nVerifique:\n1. O Ollama está rodando? (http://localhost:11434)\n2. O modelo llama3:8b está instalado?\n3. Verifique o console para mais detalhes.`;
+            chatBox.appendChild(erroMsg);
         }
-
 
         // ==============================
         // SALVA HISTÓRICO
