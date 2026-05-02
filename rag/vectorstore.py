@@ -11,6 +11,8 @@ from sentence_transformers import SentenceTransformer
 # Modelo para gerar embeddings de texto
 from pypdf import PdfReader
 # Leitura de arquivos PDF
+import hashlib
+import json
 # ==============================
 # CONFIGURAÇÕES DE CAMINHOS
 # ==============================
@@ -133,6 +135,48 @@ def load_pdf_documents():
 
 
 # ==============================
+# FUNÇÕES DE HASH E METADADOS
+# ==============================
+
+def compute_file_hash(caminho):
+    hasher = hashlib.sha256()
+    with open(caminho, 'rb') as f:
+        while True:
+            chunk = f.read(8192)
+            if not chunk:
+                break
+            hasher.update(chunk)
+    return hasher.hexdigest()
+
+
+def compute_source_hash():
+    arquivos = []
+    if os.path.exists(DATA_PATH):
+        arquivos.append(DATA_PATH)
+    if os.path.exists(DOCS_FOLDER):
+        for arquivo in sorted(os.listdir(DOCS_FOLDER)):
+            if arquivo.lower().endswith('.pdf'):
+                arquivos.append(os.path.join(DOCS_FOLDER, arquivo))
+
+    hasher = hashlib.sha256()
+    for caminho in arquivos:
+        hasher.update(compute_file_hash(caminho).encode('utf-8'))
+    return hasher.hexdigest()
+
+
+def load_meta():
+    if os.path.exists(META_PATH):
+        with open(META_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+
+def save_meta(meta):
+    with open(META_PATH, 'w', encoding='utf-8') as f:
+        json.dump(meta, f, ensure_ascii=False, indent=2)
+
+
+# ==============================
 # CRIAÇÃO DO VECTORSTORE (FAISS)
 # ==============================
 
@@ -141,67 +185,57 @@ def create_vectorstore():
     Cria ou carrega um índice vetorial FAISS.
 
     Fluxo:
-    1. Verifica se já existe índice salvo
+    1. Verifica se já existe índice salvo e se as fontes não mudaram
     2. Se sim → carrega
     3. Se não → cria novo índice
     """
 
-    # ==============================
-    # CARREGAMENTO DO ÍNDICE EXISTENTE
-    # ==============================
+    source_hash = compute_source_hash()
+    meta = load_meta()
 
-    if os.path.exists(INDEX_PATH) and os.path.exists(DOCS_PATH):
-
+    if os.path.exists(INDEX_PATH) and os.path.exists(DOCS_PATH) and meta.get('source_hash') == source_hash:
         print("Carregando índice FAISS salvo...")
-
-        # Carrega índice FAISS
         index = faiss.read_index(INDEX_PATH)
-
-        # Carrega documentos salvos
         docs = np.load(DOCS_PATH, allow_pickle=True).tolist()
-
         return index, docs
+
+    if os.path.exists(INDEX_PATH) or os.path.exists(DOCS_PATH):
+        print("Fonte alterada ou índice desatualizado. Recriando índice FAISS...")
 
     # ==============================
     # CRIAÇÃO DE NOVO ÍNDICE
     # ==============================
-    print("Criando novo índice vetorial...")
     docs = []
-    # Carrega documentos TXT
     docs.extend(load_txt_documents())
-    # Carrega documentos PDF
     docs.extend(load_pdf_documents())
-    # Se não houver documentos, lança erro
+
     if not docs:
         raise ValueError("Nenhum documento encontrado para indexação.")
+
     print("Total de blocos carregados:", len(docs))
+
     # ==============================
     # GERAÇÃO DE EMBEDDINGS
     # ==============================
-    # Converte cada bloco em vetor numérico
     embeddings = model.encode(
         docs,
         convert_to_numpy=True,
         show_progress_bar=True
     )
-    # Dimensão dos vetores (ex: 384)
     dimension = embeddings.shape[1]
-
 
     # ==============================
     # CRIAÇÃO DO ÍNDICE FAISS
     # ==============================
-    # IndexFlatL2 → usa distância euclidiana (L2)
     index = faiss.IndexFlatL2(dimension)
-    # Adiciona os embeddings ao índice
     index.add(embeddings)
+
     # ==============================
     # SALVAMENTO EM DISCO
     # ==============================
-    # Salva o índice
     faiss.write_index(index, INDEX_PATH)
-    # Salva os documentos
     np.save(DOCS_PATH, docs)
+    save_meta({'source_hash': source_hash})
     print("Índice FAISS criado e salvo com sucesso.")
     return index, docs
 
