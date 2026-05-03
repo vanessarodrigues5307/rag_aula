@@ -29,6 +29,9 @@ INDEX_PATH = "rag/index.faiss"
 DOCS_PATH = "rag/docs.npy"
 # Caminho onde os documentos (chunks) serão salvos
 
+META_PATH = "rag/meta.json"
+# Caminho onde os metadados serão salvos
+
 # ==============================
 # MODELO DE EMBEDDINGS
 # ==============================
